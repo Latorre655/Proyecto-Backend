@@ -23,7 +23,8 @@ Route::get("/formulario", function(){
 
 Route::get('/contacto', function (HttpRequest $request) {
     echo "<pre>";
-    print_r ($request -> get("nombre"));
+    print_r ($request -> get("email"));
+    print_r ($request -> get("message"));
     echo "</pre>";
 });
 

@@ -211,7 +211,7 @@
         </div>
 
         <div class="form-container">
-            <form id="contactForm" novalidate>
+            <form method="GET" action="/contacto">
                 <div class="form-group">
                     <label for="email">
                         <span class="icon">✉️</span>Correo Electrónico
@@ -254,127 +254,6 @@
         </div>
     </div>
 
-    <script>
-        const form = document.getElementById('contactForm');
-        const emailInput = document.getElementById('email');
-        const mensajeInput = document.getElementById('mensaje');
-        const submitBtn = document.getElementById('submitBtn');
-        const successMessage = document.getElementById('successMessage');
-        const charCount = document.getElementById('charCount');
 
-        // Contador de caracteres
-        mensajeInput.addEventListener('input', function() {
-            charCount.textContent = this.value.length;
-        });
-
-        // Validación en tiempo real
-        emailInput.addEventListener('blur', function() {
-            validateEmail();
-        });
-
-        mensajeInput.addEventListener('blur', function() {
-            validateMensaje();
-        });
-
-        // Función para validar email
-        function validateEmail() {
-            const emailValue = emailInput.value.trim();
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const formGroup = emailInput.parentElement;
-
-            if (emailValue === '') {
-                setError(formGroup, 'El correo es obligatorio');
-                return false;
-            } else if (!emailRegex.test(emailValue)) {
-                setError(formGroup, 'Por favor ingresa un correo válido');
-                return false;
-            } else {
-                setSuccess(formGroup);
-                return true;
-            }
-        }
-
-        // Función para validar mensaje
-        function validateMensaje() {
-            const mensajeValue = mensajeInput.value.trim();
-            const formGroup = mensajeInput.parentElement;
-
-            if (mensajeValue === '') {
-                setError(formGroup, 'El mensaje es obligatorio');
-                return false;
-            } else if (mensajeValue.length < 10) {
-                setError(formGroup, 'El mensaje debe tener al menos 10 caracteres');
-                return false;
-            } else {
-                setSuccess(formGroup);
-                return true;
-            }
-        }
-
-        // Establecer error
-        function setError(formGroup, message) {
-            formGroup.classList.add('error');
-            formGroup.classList.remove('success');
-            const errorMessage = formGroup.querySelector('.error-message');
-            if (errorMessage) {
-                errorMessage.textContent = message;
-            }
-        }
-
-        // Establecer éxito
-        function setSuccess(formGroup) {
-            formGroup.classList.add('success');
-            formGroup.classList.remove('error');
-        }
-
-        // Manejo del envío del formulario
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const isEmailValid = validateEmail();
-            const isMensajeValid = validateMensaje();
-
-            if (isEmailValid && isMensajeValid) {
-                // Deshabilitar botón
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Enviando...';
-
-                // Simular envío (aquí irían tus datos reales)
-                setTimeout(() => {
-                    // Mostrar mensaje de éxito
-                    successMessage.classList.add('show');
-
-                    // Resetear formulario
-                    form.reset();
-                    charCount.textContent = '0';
-
-                    // Limpiar clases de validación
-                    document.querySelectorAll('.form-group').forEach(group => {
-                        group.classList.remove('success', 'error');
-                    });
-
-                    // Restaurar botón
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Enviar Mensaje';
-
-                    // Ocultar mensaje de éxito después de 5 segundos
-                    setTimeout(() => {
-                        successMessage.classList.remove('show');
-                    }, 5000);
-
-                    // Aquí puedes agregar código para enviar los datos a un servidor
-                    console.log('Email:', emailInput.value);
-                    console.log('Mensaje:', mensajeInput.value);
-                }, 1500);
-            }
-        });
-
-        // Limpiar mensaje de éxito al empezar a escribir
-        [emailInput, mensajeInput].forEach(input => {
-            input.addEventListener('input', () => {
-                successMessage.classList.remove('show');
-            });
-        });
-    </script>
 </body>
 </html>
