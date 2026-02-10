@@ -13,14 +13,62 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/mi-ruta-a', function () {
-    return 'HOLA ESTA ES MI RUTA';
-});
 
 Route::get('/php-basico', function () {
-    return 'ESTOY APRENDIENDO PHP';
+
+    echo "<h1> Variables..... </h1>";
+
+    $apellido = "Latorre";
+    $nombre = "Johan";
+
+    $nombrecompleto = $nombre . " " . $apellido;
+    $age = rand(10,54);
+    $height = 1.75;
+    $islogin = (bool) rand(0,1);
+     echo $nombrecompleto;
+
+     echo"<br><h2>**************************** ESTRUCTURAS DE DATOS ********************</br></h2>";
+    $menssage = "Soy $nombrecompleto, tengo $age años!!!<br>";
+
+    echo $menssage;
+
+    if ($age <18){
+        $menssage = $menssage . "Soy menor de edad<br>";
+    } else if($age > 50){
+        $menssage .= "Eres adulto mayor<br>";
+
+    } else{
+            $menssage .= "Eres adulto<br>";
+        };
+
+    echo $menssage;
+
+    $menssage .= " ".($islogin ? "Estoy logueado" : "No estoy logueado").".<br>";
+
+    echo "<br>********************** FUNCIONES *****************<br>";
+
+    echo printUser($nombrecompleto, $age);
+
+    $productNames = ["Computaodr", "Teclado", 25, true, false];
+    $teclado = [
+        "name" => "teclado hp",
+        "marca" => "HP",
+        "precio" => 20000,
+        "distribuciones" => [
+            "latino",
+            "mexico",
+            "americano"
+        ]
+    ];
+    $teclado["marca"] = "LG";
+    echo $teclado["name"];
+
+    foreach ($productNames as $item){
+         echo $item;
+    }
+
 });
+
+Function printUser(string $nombre, int $age){
+    return "<br>$nombre tiene $age años.<br>";
+}
