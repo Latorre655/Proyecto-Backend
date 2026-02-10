@@ -1,5 +1,7 @@
 <?php
 
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get("/formulario", function(){
+    return view("form");
+});
+
+
+
+Route::get('/contacto', function (HttpRequest $request) {
+    echo "<pre>";
+    print_r ($request -> get("nombre"));
+    echo "</pre>";
+});
 
 Route::get('/php-basico', function () {
 
